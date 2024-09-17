@@ -10,9 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_17_183525) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_17_191745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "coments", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_coments_on_tweet_id"
+    t.index ["user_id"], name: "index_coments_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_likes_on_tweet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "reposts", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_reposts_on_tweet_id"
+    t.index ["user_id"], name: "index_reposts_on_user_id"
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -22,4 +58,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_183525) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "coments", "tweets"
+  add_foreign_key "coments", "users"
+  add_foreign_key "likes", "tweets"
+  add_foreign_key "likes", "users"
+  add_foreign_key "reposts", "tweets"
+  add_foreign_key "reposts", "users"
+  add_foreign_key "tweets", "users"
 end
