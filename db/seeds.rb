@@ -8,10 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Repost.destroy_all
+Like.destroy_all
+Tweet.destroy_all
+Comment.destroy_all
+User.destroy_all
 
 user = User.find_or_create_by(
     username: "Anna Martins",
     email: "annamartins@gmail.com"
+)
+user = User.find_or_create_by(
+    username: "john db",
+    email: "johndb@gmail.com"
 )
 
 tweet = Tweet.find_or_create_by(
