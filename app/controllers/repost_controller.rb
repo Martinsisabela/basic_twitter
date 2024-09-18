@@ -1,3 +1,0 @@
-class RepostController < ApplicationController
-    
-end
