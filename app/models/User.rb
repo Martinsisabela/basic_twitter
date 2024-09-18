@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-    has many :tweets
-    has many :reposts
+    has_many :tweets
+    has_many :reposts
 end
